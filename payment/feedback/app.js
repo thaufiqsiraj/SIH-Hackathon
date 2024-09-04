@@ -22,14 +22,14 @@ sendBtn.addEventListener("click", () => {
     <p class="heart">💖</p>
     <strong>Thank You! </strong>
     <br>
-    <strong>Feedback: ${selectedRating} </strong>
-  `;
-});
+    <strong>Feedback: ${selectedRating} </strong>`;
 
-setTimeout(() => {
+  setTimeout(() => {
 window.location.href = 'https://www.example.com'; // Replace with your URL
   }, 3000); // 3 seconds delay
 });
+
+
 
 function removeActive() {
   for (let i = 0; i < ratings.length; i++) {
