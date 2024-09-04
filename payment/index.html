@@ -1,48 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Payments</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Ensure the correct path -->
 </head>
+
 <body>
     <div class="modal">
         <form class="form" id="paymentForm">
-          <div class="credit-card-info--form">
-            <div class="input_container">
-              <label for="name_field" class="input_label">Card holder full name</label>
-              <input id="name_field" class="input_field" type="text" name="input-name" title="Input title" placeholder="Enter your full name">
+            <div class="credit-card-info--form">
+                <div class="input_container">
+                    <label for="name_field" class="input_label">Card holder full name</label>
+                    <input id="name_field" class="input_field" type="text" name="input-name" title="Input title"
+                        placeholder="Enter your full name">
+                </div>
+                <div class="input_container">
+                    <label for="card_number_field" class="input_label">Card Number</label>
+                    <input id="card_number_field" class="input_field" type="number" name="input-number" title="Input title"
+                        placeholder="0000 0000 0000 0000">
+                </div>
+                <div class="input_container">
+                    <label for="expiry_date_field" class="input_label">Expiry Date</label>
+                    <input id="expiry_date_field" class="input_field" type="text" name="input-expiry" title="Expiry Date"
+                        placeholder="01/23">
+                </div>
+                <div class="input_container">
+                    <label for="cvv_field" class="input_label">CVV</label>
+                    <input id="cvv_field" class="input_field" type="text" name="input-cvv" title="CVV" placeholder="000">
+                </div>
+                <div class="input_container">
+                    <label for="total_amount" class="input_label">Total Payable Amount</label>
+                    <input id="total_amount" class="input_field" type="text" name="input-total" title="Total Payable Amount"
+                        readonly>
+                </div>
             </div>
-            <div class="input_container">
-              <label for="card_number_field" class="input_label">Card Number</label>
-              <input id="card_number_field" class="input_field" type="number" name="input-number" title="Input title" placeholder="0000 0000 0000 0000">
-            </div>
-            <div class="input_container">
-              <label for="expiry_date_field" class="input_label">Expiry Date</label>
-              <input id="expiry_date_field" class="input_field" type="text" name="input-expiry" title="Expiry Date" placeholder="01/23">
-            </div>
-            <div class="input_container">
-              <label for="cvv_field" class="input_label">CVV</label>
-              <input id="cvv_field" class="input_field" type="text" name="input-cvv" title="CVV" placeholder="000">
-            </div>
-          </div>
-          <button type="submit" class="purchase--btn" id="purchase--btn">Checkout</button>
+            <button type="submit" class="purchase--btn" id="purchase--btn">Checkout</button>
         </form>
     </div>
+    <div class="message-container">
     <div id="paymentMessage" style="display: none;">
         Payment Successful
     </div>
-  <br>
-  <a href="feedback/index.html" id="feedbackRequest" style="display: none;">Please provide feedback</a>
+    <br>
+    <a href="feedback/index.html" id="feedbackRequest" style="display: none;">Please provide feedback</a>
+    </div>
     <script>
         // JavaScript to handle the button click and show the message
-        document.getElementById("paymentForm").addEventListener("submit", function(event) {
+        document.getElementById("paymentForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Prevent the form from submitting
             document.getElementById("paymentMessage").style.display = "block"; // Show the payment message
-            document.getElementById("feedbackRequest").style.display = "block"; // Show the payment message
+            document.getElementById("feedbackRequest").style.display = "block"; // Show the feedback request
         });
+
+        // Get the query string from the URL
+        const queryString = window.location.search;
+
+        // Parse the query string to get the total_cost
+        const urlParams = new URLSearchParams(queryString);
+        const totalCost = urlParams.get('total_cost');
+
+        // Display the total cost on the payment form
+        document.getElementById('total_amount').value = totalCost ? `${totalCost} INR` : '0 INR';
     </script>
 </body>
+
 </html>
