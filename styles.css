@@ -1,6 +1,4 @@
-body {
-  padding-left: clamp(1rem, 10vw, 2rem); 
-}
+
 .form_container {
   width: fit-content;
   height: fit-content;
